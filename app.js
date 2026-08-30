@@ -127,8 +127,7 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 function initTheme() {
-  const savedTheme = localStorage.getItem(THEME_KEY) || 
-    (window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark');
+  const savedTheme = localStorage.getItem(THEME_KEY) || 'light';
   document.documentElement.setAttribute('data-theme', savedTheme);
 }
 
