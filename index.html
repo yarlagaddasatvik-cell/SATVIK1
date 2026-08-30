@@ -2,316 +2,1390 @@
 <html lang="en" data-theme="light">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="TaskPulse - A sleek, modern, light & dark To-Do and Task Management Web App with soft pastel colors, priority tracking, and analytics.">
-  <title>TaskPulse — Modern Task Management</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta name="description" content="Arogya Mitra — Home Healthcare Platform for Rural and Urban Andhra Pradesh. Book home visits by doctors, nurses, physiotherapy, teleconsultation, medicine reminders, and emergency 108 support.">
+  <title>Arogya Mitra (ఆరోగ్య మిత్ర) — Home Healthcare AP</title>
+  
+  <!-- Google Fonts: Plus Jakarta Sans, Outfit, and Noto Sans Telugu -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Outfit:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Telugu:wght@400;500;600;700&family=Outfit:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <!-- Soft Ambient Glow Accents -->
-  <div class="bg-glow bg-glow-1"></div>
-  <div class="bg-glow bg-glow-2"></div>
-  <div class="bg-glow bg-glow-3"></div>
+  <!-- Ambient Soft Gradients -->
+  <div class="ambient-glow glow-emerald"></div>
+  <div class="ambient-glow glow-teal"></div>
+  <div class="ambient-glow glow-coral"></div>
 
-  <div class="app-container">
-    <!-- Header -->
-    <header class="app-header">
-      <div class="brand">
-        <div class="brand-icon">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/>
-          </svg>
-        </div>
-        <div class="brand-text">
-          <h1>Task<span>Pulse</span></h1>
-          <p id="current-date">Today's Focus</p>
+  <!-- Emergency Quick Bar (Always Accessible at top) -->
+  <div class="emergency-ticker-bar" id="emergencyTicker">
+    <div class="ticker-content">
+      <div class="ticker-badge">
+        <span class="pulse-dot"></span>
+        <span data-i18n="emergency_247">AP 24/7 Health Helplines:</span>
+      </div>
+      <div class="ticker-links">
+        <a href="tel:108" class="helpline-chip chip-108" title="Call 108 Free Ambulance">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M19 17h2c.6 0 1-.4 1-1v-3c0-.9-.7-1.7-1.5-1.9C18.7 10.6 16 10 16 10s-1.3-1.4-2.2-2.3c-.5-.4-1.1-.7-1.8-.7H5c-.6 0-1 .4-1 1v9c0 .6.4 1 1 1h2"/><circle cx="7" cy="17" r="2"/><path d="M9 17h6"/><circle cx="17" cy="17" r="2"/></svg>
+          <span><strong>108</strong> <small data-i18n="ambulance">Ambulance</small></span>
+        </a>
+        <a href="tel:104" class="helpline-chip chip-104" title="Call 104 AP Health Advice">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+          <span><strong>104</strong> <small data-i18n="medical_advice">Medical Advice</small></span>
+        </a>
+        <a href="tel:102" class="helpline-chip chip-102" title="Call 102 Janani Express Maternal Support">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+          <span><strong>102</strong> <small data-i18n="maternal_care">Thalli-Bidda</small></span>
+        </a>
+      </div>
+      <button class="sos-pill-btn" id="openSosBtn">
+        <span class="sos-glow"></span>
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2L1 21h22L12 2zm0 3.99L19.53 19H4.47L12 5.99zM11 10h2v4h-2zm0 6h2v2h-2z"/></svg>
+        <span data-i18n="emergency_sos">SOS EMERGENCY</span>
+      </button>
+    </div>
+  </div>
+
+  <!-- App Wrapper Container -->
+  <div class="app-layout">
+    
+    <!-- Top Header -->
+    <header class="main-header glass-card">
+      <div class="header-left">
+        <div class="brand-logo" id="logoClick">
+          <div class="logo-emblem">
+            <svg viewBox="0 0 36 36" fill="none">
+              <rect width="36" height="36" rx="10" fill="url(#brandGrad)" />
+              <path d="M18 8v20M8 18h20" stroke="#ffffff" stroke-width="4" stroke-linecap="round"/>
+              <circle cx="18" cy="18" r="4" fill="#ffffff" />
+              <defs>
+                <linearGradient id="brandGrad" x1="0" y1="0" x2="36" y2="36" gradientUnits="userSpaceOnUse">
+                  <stop stop-color="#059669"/>
+                  <stop offset="1" stop-color="#0d9488"/>
+                </linearGradient>
+              </defs>
+            </svg>
+          </div>
+          <div class="brand-info">
+            <div class="brand-title">
+              <span class="title-main">Arogya</span><span class="title-accent">Mitra</span>
+              <span class="ap-badge">AP Gov Scheme Partner</span>
+            </div>
+            <p class="brand-sub" data-i18n="tagline">గ్రామ & పట్టణ గృహ ఆరోగ్య సేవలు • Andhra Pradesh</p>
+          </div>
         </div>
       </div>
 
-      <div class="header-actions">
-        <!-- Interactive Light / Dark Mode Toggle Pill -->
-        <div class="theme-switch-wrapper" title="Switch Theme (Light / Dark)">
-          <button id="theme-toggle" class="theme-toggle-pill" aria-label="Toggle Light and Dark Theme">
-            <span class="theme-option light-opt">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <circle cx="12" cy="12" r="5"></circle>
-                <line x1="12" y1="1" x2="12" y2="3"></line>
-                <line x1="12" y1="21" x2="12" y2="23"></line>
-                <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
-                <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
-                <line x1="1" y1="12" x2="3" y2="12"></line>
-                <line x1="21" y1="12" x2="23" y2="12"></line>
-                <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
-                <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
-              </svg>
-              <span>Light</span>
-            </span>
-            <span class="theme-option dark-opt">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
-              </svg>
-              <span>Dark</span>
-            </span>
-            <span class="theme-slider"></span>
-          </button>
+      <!-- District & Village Selector -->
+      <div class="header-center">
+        <div class="location-pill" id="locationSelectorBtn" title="Select your AP District / Mandal">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+          <div class="loc-text">
+            <span class="loc-label" data-i18n="service_location">Location</span>
+            <span class="loc-name" id="currentDistrictText">Vijayawada, Krishna Dist</span>
+          </div>
+          <svg class="chevron-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+        </div>
+      </div>
+
+      <!-- Controls: Language Toggle & Profile -->
+      <div class="header-right">
+        <!-- Language Switcher -->
+        <div class="lang-switch-toggle" title="Switch Language (English / తెలుగు)">
+          <button class="lang-btn active" id="langEnBtn" data-lang="en">English</button>
+          <button class="lang-btn" id="langTeBtn" data-lang="te">తెలుగు</button>
+        </div>
+
+        <!-- Notification Bell -->
+        <button class="icon-circle-btn" id="notificationBtn" title="Health Alerts & Reminders" aria-label="Notifications">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
+          <span class="notif-badge" id="notifBadgeCount">3</span>
+        </button>
+
+        <!-- User Profile Pill -->
+        <div class="user-profile-pill" id="userProfileBtn">
+          <div class="user-avatar">
+            <span>RG</span>
+          </div>
+          <div class="user-meta hide-mobile">
+            <span class="user-name" id="profileNameDisplay">Ramesh Garu</span>
+            <span class="user-status" data-i18n="village_resident">Grama Resident</span>
+          </div>
         </div>
       </div>
     </header>
 
-    <!-- Progress Card -->
-    <section class="progress-card glass-panel" aria-label="Task Progress Summary">
-      <div class="progress-content">
-        <div class="progress-details">
-          <span class="progress-greeting" id="quote-text">Stay productive and achieve your goals!</span>
-          <div class="progress-stats">
-            <div class="stat-item">
-              <span class="stat-number" id="stat-total">0</span>
-              <span class="stat-label">Total</span>
-            </div>
-            <div class="stat-divider"></div>
-            <div class="stat-item">
-              <span class="stat-number" id="stat-pending">0</span>
-              <span class="stat-label">Pending</span>
-            </div>
-            <div class="stat-divider"></div>
-            <div class="stat-item">
-              <span class="stat-number stat-success" id="stat-completed">0</span>
-              <span class="stat-label">Done</span>
-            </div>
-          </div>
-        </div>
+    <!-- Main Content Area with Navigation Layout -->
+    <div class="main-body-container">
 
-        <div class="progress-ring-container">
-          <svg class="progress-ring" viewBox="0 0 100 100">
-            <circle class="progress-ring-bg" cx="50" cy="50" r="40" />
-            <circle class="progress-ring-fill" id="progress-circle" cx="50" cy="50" r="40" />
-          </svg>
-          <div class="progress-ring-label">
-            <span id="progress-percentage">0%</span>
-          </div>
-        </div>
-      </div>
-      <div class="progress-bar-container">
-        <div class="progress-bar-fill" id="progress-bar"></div>
-      </div>
-    </section>
-
-    <!-- Task Creator Form -->
-    <section class="task-form-card glass-panel" aria-label="Create New Task">
-      <form id="task-form" autocomplete="off">
-        <div class="input-main-row">
-          <div class="input-wrapper">
-            <input 
-              type="text" 
-              id="task-title-input" 
-              placeholder="What needs to be done? (Press Enter to add)" 
-              required 
-              maxlength="120"
-            />
-          </div>
-          <button type="submit" id="add-task-btn" class="btn btn-primary" title="Add Task">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-              <line x1="12" y1="5" x2="12" y2="19"></line>
-              <line x1="5" y1="12" x2="19" y2="12"></line>
-            </svg>
-            <span>Add Task</span>
+      <!-- Navigation Sidebar / Tabs Menu -->
+      <aside class="sidebar-nav glass-card" id="mainSidebar">
+        <div class="nav-section-title" data-i18n="nav_main_menu">HEALTHCARE SERVICES</div>
+        <nav class="nav-list" role="tablist">
+          <button class="nav-item active" data-tab="dashboard" role="tab" aria-selected="true">
+            <div class="nav-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg></div>
+            <span class="nav-label" data-i18n="tab_dashboard">Home Overview</span>
           </button>
-        </div>
-
-        <!-- Collapsible / Advanced Options -->
-        <div class="task-options-row">
-          <div class="option-group">
-            <label for="task-category-select">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path>
-                <line x1="7" y1="7" x2="7.01" y2="7"></line>
-              </svg>
-              Category
-            </label>
-            <select id="task-category-select">
-              <option value="Personal">Personal</option>
-              <option value="Work">Work</option>
-              <option value="Study">Study</option>
-              <option value="Health">Health</option>
-              <option value="Finance">Finance</option>
-              <option value="Ideas">Ideas</option>
-            </select>
-          </div>
-
-          <div class="option-group">
-            <label for="task-priority-select">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
-              </svg>
-              Priority
-            </label>
-            <select id="task-priority-select">
-              <option value="Medium">Medium Priority</option>
-              <option value="High">High Priority</option>
-              <option value="Low">Low Priority</option>
-            </select>
-          </div>
-
-          <div class="option-group">
-            <label for="task-due-date-input">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
-                <line x1="16" y1="2" x2="16" y2="6"></line>
-                <line x1="8" y1="2" x2="8" y2="6"></line>
-                <line x1="3" y1="10" x2="21" y2="10"></line>
-              </svg>
-              Due Date
-            </label>
-            <input type="date" id="task-due-date-input" />
-          </div>
-        </div>
-      </form>
-    </section>
-
-    <!-- Controls, Filter & Search Bar -->
-    <section class="controls-card glass-panel" aria-label="Filters and Search">
-      <div class="search-box">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-          <circle cx="11" cy="11" r="8"></circle>
-          <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
-        </svg>
-        <input type="text" id="search-input" placeholder="Search tasks..." />
-        <button id="clear-search-btn" class="clear-btn" aria-label="Clear search" style="display: none;">&times;</button>
-      </div>
-
-      <div class="filter-sort-row">
-        <!-- Status Tabs -->
-        <div class="filter-tabs" role="tablist">
-          <button class="tab-btn active" data-filter="all" role="tab">All <span class="badge" id="badge-all">0</span></button>
-          <button class="tab-btn" data-filter="active" role="tab">Active <span class="badge" id="badge-active">0</span></button>
-          <button class="tab-btn" data-filter="completed" role="tab">Completed <span class="badge" id="badge-completed">0</span></button>
-        </div>
-
-        <!-- Filter & Sort dropdowns -->
-        <div class="dropdown-filters">
-          <select id="filter-category" class="filter-select" aria-label="Filter by category">
-            <option value="all">All Categories</option>
-            <option value="Personal">Personal</option>
-            <option value="Work">Work</option>
-            <option value="Study">Study</option>
-            <option value="Health">Health</option>
-            <option value="Finance">Finance</option>
-            <option value="Ideas">Ideas</option>
-          </select>
-
-          <select id="filter-priority" class="filter-select" aria-label="Filter by priority">
-            <option value="all">All Priorities</option>
-            <option value="High">High</option>
-            <option value="Medium">Medium</option>
-            <option value="Low">Low</option>
-          </select>
-
-          <select id="sort-select" class="filter-select" aria-label="Sort tasks">
-            <option value="created-desc">Newest First</option>
-            <option value="created-asc">Oldest First</option>
-            <option value="due-asc">Due Date (Earliest)</option>
-            <option value="priority-desc">Priority (High to Low)</option>
-            <option value="title-asc">Alphabetical (A-Z)</option>
-          </select>
-        </div>
-      </div>
-    </section>
-
-    <!-- Task List Container -->
-    <main class="tasks-section" aria-label="Tasks">
-      <div class="tasks-header">
-        <h2 id="current-view-title">All Tasks</h2>
-        <div class="tasks-header-actions">
-          <button id="clear-completed-btn" class="btn btn-secondary-sm" title="Remove all completed tasks">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <polyline points="3 6 5 6 21 6"></polyline>
-              <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
-            </svg>
-            Clear Completed
+          
+          <button class="nav-item" data-tab="book-visit" role="tab" aria-selected="false">
+            <div class="nav-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/><path d="M16 11l2 2 4-4"/></svg></div>
+            <span class="nav-label" data-i18n="tab_book_visit">Book Home Visit</span>
+            <span class="nav-tag tag-green" data-i18n="popular">Fast</span>
           </button>
+
+          <button class="nav-item" data-tab="medicine-reminders" role="tab" aria-selected="false">
+            <div class="nav-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/><path d="M12 2v2M12 20v2"/></svg></div>
+            <span class="nav-label" data-i18n="tab_medicines">Medicine Reminders</span>
+            <span class="nav-tag tag-amber" id="pendingPillCount">2 Due</span>
+          </button>
+
+          <button class="nav-item" data-tab="teleconsult" role="tab" aria-selected="false">
+            <div class="nav-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2" ry="2"/></svg></div>
+            <span class="nav-label" data-i18n="tab_teleconsult">Teleconsultation</span>
+            <span class="nav-tag tag-blue">Live 24/7</span>
+          </button>
+
+          <button class="nav-item" data-tab="health-records" role="tab" aria-selected="false">
+            <div class="nav-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg></div>
+            <span class="nav-label" data-i18n="tab_records">Aarogya Vault (Records)</span>
+          </button>
+
+          <button class="nav-item" data-tab="home-diagnostics" role="tab" aria-selected="false">
+            <div class="nav-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4.5 3h15M6 3v16a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V3M6 14h12"/></svg></div>
+            <span class="nav-label" data-i18n="tab_diagnostics">Home Lab & ECG</span>
+          </button>
+
+          <button class="nav-item" data-tab="maternal-child" role="tab" aria-selected="false">
+            <div class="nav-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg></div>
+            <span class="nav-label" data-i18n="tab_maternal">Maternal & Child Care</span>
+          </button>
+
+          <button class="nav-item" data-tab="elder-care" role="tab" aria-selected="false">
+            <div class="nav-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="7" r="4"/><path d="M6 21v-2a4 4 0 0 1 4-4h4a4 4 0 0 1 4 4v2"/><path d="M19 12v6M22 15h-6"/></svg></div>
+            <span class="nav-label" data-i18n="tab_elder">Elder Care & Vitals</span>
+          </button>
+        </nav>
+
+        <!-- Helpline Card in Sidebar -->
+        <div class="sidebar-help-card">
+          <div class="help-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+          </div>
+          <h4 data-i18n="asha_worker_support">Need Help Booking?</h4>
+          <p data-i18n="asha_desc">Call your local Village Ward Healthcare Secretariat / ASHA Volunteer.</p>
+          <a href="tel:104" class="btn-sidebar-call">
+            <span data-i18n="call_104_free">Dial 104 (Toll-Free)</span>
+          </a>
         </div>
-      </div>
+      </aside>
 
-      <ul id="task-list" class="task-list" aria-live="polite">
-        <!-- Dynamically populated tasks will appear here -->
-      </ul>
+      <!-- Main Dynamic Content Views -->
+      <main class="content-viewport" id="contentViewport">
 
-      <!-- Empty State View -->
-      <div id="empty-state" class="empty-state glass-panel" style="display: none;">
-        <div class="empty-icon-wrap">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M9 11l3 3L22 4"></path>
-            <path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"></path>
-          </svg>
-        </div>
-        <h3 id="empty-state-title">No tasks found</h3>
-        <p id="empty-state-subtitle">Add a task above to keep your productivity flowing!</p>
-      </div>
-    </main>
+        <!-- =============================================================== -->
+        <!-- TAB 1: DASHBOARD / HOME OVERVIEW -->
+        <!-- =============================================================== -->
+        <section class="tab-panel active" id="tab-dashboard">
+          
+          <!-- Hero Banner with Greeting & Fast Actions -->
+          <div class="hero-healthcare-card glass-card">
+            <div class="hero-text-side">
+              <div class="ap-scheme-pill">
+                <span class="glow-dot"></span>
+                <span data-i18n="ap_initiative">Dr. YSR Aarogya Asara & Grama Clinic Connected</span>
+              </div>
+              <h1 class="hero-heading">
+                <span data-i18n="hero_greeting">Namaskaram</span>, <span id="heroPatientName">Ramesh Garu</span>! 👋
+              </h1>
+              <p class="hero-subtitle" data-i18n="hero_subtext">
+                Quality doctor consultations, certified nursing, diagnostics, and elderly assistance delivered right to your home in rural & urban Andhra Pradesh.
+              </p>
+              <div class="hero-actions">
+                <button class="btn btn-primary" onclick="window.app.switchTab('book-visit')">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 5v14M5 12h14"/></svg>
+                  <span data-i18n="btn_book_visit">Book Home Visit Now</span>
+                </button>
+                <button class="btn btn-secondary" onclick="window.app.switchTab('teleconsult')">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2" ry="2"/></svg>
+                  <span data-i18n="btn_video_doctor">Instant Video Call</span>
+                </button>
+              </div>
+            </div>
+            <div class="hero-stat-side">
+              <div class="stat-bubble-card">
+                <div class="bubble-icon icon-emerald">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+                </div>
+                <div class="bubble-info">
+                  <span class="bubble-title" data-i18n="vitals_status">Health Vitals</span>
+                  <span class="bubble-val text-success" data-i18n="status_stable">All Normal (BP 120/80)</span>
+                  <small data-i18n="last_checked">Checked 2h ago</small>
+                </div>
+              </div>
 
-    <!-- Footer -->
-    <footer class="app-footer">
-      <p>TaskPulse &bull; Pure HTML &amp; CSS &bull; Local Storage Persistent</p>
-    </footer>
-  </div>
+              <div class="stat-bubble-card">
+                <div class="bubble-icon icon-amber">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                </div>
+                <div class="bubble-info">
+                  <span class="bubble-title" data-i18n="next_medicine">Next Medicine</span>
+                  <span class="bubble-val" id="dashboardNextMedText">Telmisartan 40mg • 2:00 PM</span>
+                  <small class="text-amber" data-i18n="after_lunch">After Lunch</small>
+                </div>
+              </div>
+            </div>
+          </div>
 
-  <!-- Edit Task Modal -->
-  <div id="edit-modal" class="modal-overlay" aria-hidden="true" role="dialog">
-    <div class="modal-container glass-panel">
+          <!-- Quick Service Grid -->
+          <div class="section-header-row">
+            <div>
+              <h2 class="section-title" data-i18n="services_header">Home Healthcare Services</h2>
+              <p class="section-subtitle" data-i18n="services_sub">Doorstep medical support across 26 Districts in AP</p>
+            </div>
+            <span class="service-count-badge" data-i18n="all_services_available">All Services Available Today</span>
+          </div>
+
+          <div class="services-grid">
+            <!-- 1. Doctor Visit -->
+            <div class="service-card glass-card" onclick="window.app.startServiceBooking('doctor')">
+              <div class="service-icon-box bg-emerald">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/><path d="M12 11v6M9 14h6"/></svg>
+              </div>
+              <h3 class="service-name" data-i18n="srv_doctor">Doctor Home Visit</h3>
+              <p class="service-desc" data-i18n="srv_doctor_desc">General Physicians & Specialists visit your home for diagnosis & treatment.</p>
+              <div class="service-card-footer">
+                <span class="fee-tag" data-i18n="from_fee_300">From ₹299 / Free (Aarogyasri)</span>
+                <span class="arrow-circle">→</span>
+              </div>
+            </div>
+
+            <!-- 2. Nurse Visits -->
+            <div class="service-card glass-card" onclick="window.app.startServiceBooking('nurse')">
+              <div class="service-icon-box bg-teal">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09z"/><path d="M12 15l-3-3a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 0 1-4 2z"/><path d="M9 12H4s.55-3.03 2-4.5c1.47-1.47 4.5-2 4.5-2"/></svg>
+              </div>
+              <h3 class="service-name" data-i18n="srv_nurse">Nurse Care & Injections</h3>
+              <p class="service-desc" data-i18n="srv_nurse_desc">Injections, IV drip, wound dressing, catheter change, and post-op care.</p>
+              <div class="service-card-footer">
+                <span class="fee-tag" data-i18n="from_fee_150">From ₹149</span>
+                <span class="arrow-circle">→</span>
+              </div>
+            </div>
+
+            <!-- 3. Physiotherapy -->
+            <div class="service-card glass-card" onclick="window.app.startServiceBooking('physio')">
+              <div class="service-icon-box bg-blue">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8h1a4 4 0 0 1 0 8h-1"/><path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"/><line x1="6" y1="1" x2="6" y2="4"/><line x1="10" y1="1" x2="10" y2="4"/><line x1="14" y1="1" x2="14" y2="4"/></svg>
+              </div>
+              <h3 class="service-name" data-i18n="srv_physio">Physiotherapy at Home</h3>
+              <p class="service-desc" data-i18n="srv_physio_desc">Stroke rehabilitation, joint pain, paralysis recovery, and ortho exercises.</p>
+              <div class="service-card-footer">
+                <span class="fee-tag" data-i18n="from_fee_350">From ₹349</span>
+                <span class="arrow-circle">→</span>
+              </div>
+            </div>
+
+            <!-- 4. Elder Care -->
+            <div class="service-card glass-card" onclick="window.app.startServiceBooking('elder')">
+              <div class="service-icon-box bg-purple">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="7" r="4"/><path d="M6 21v-2a4 4 0 0 1 4-4h4a4 4 0 0 1 4 4v2"/><path d="M19 12v6M22 15h-6"/></svg>
+              </div>
+              <h3 class="service-name" data-i18n="srv_elder">Elder Care & Attendants</h3>
+              <p class="service-desc" data-i18n="srv_elder_desc">Daily companionship, medicine management, mobility, and hygiene care.</p>
+              <div class="service-card-footer">
+                <span class="fee-tag" data-i18n="from_fee_400">Day / 24h Attendant</span>
+                <span class="arrow-circle">→</span>
+              </div>
+            </div>
+
+            <!-- 5. Lab Tests & ECG -->
+            <div class="service-card glass-card" onclick="window.app.switchTab('home-diagnostics')">
+              <div class="service-icon-box bg-amber">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4.5 3h15M6 3v16a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V3M6 14h12"/></svg>
+              </div>
+              <h3 class="service-name" data-i18n="srv_diagnostic">Home Diagnostic & ECG</h3>
+              <p class="service-desc" data-i18n="srv_diag_desc">Blood tests, Sugar, Thyroid, HbA1c, and Portable 12-lead ECG at home.</p>
+              <div class="service-card-footer">
+                <span class="fee-tag" data-i18n="from_fee_99">From ₹99 Sample Pickup</span>
+                <span class="arrow-circle">→</span>
+              </div>
+            </div>
+
+            <!-- 6. Maternal & Child -->
+            <div class="service-card glass-card" onclick="window.app.switchTab('maternal-child')">
+              <div class="service-icon-box bg-rose">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+              </div>
+              <h3 class="service-name" data-i18n="srv_maternal">Maternal & Child Care</h3>
+              <p class="service-desc" data-i18n="srv_maternal_desc">Pregnancy checkup tracking, ANC schedules, and baby vaccination reminders.</p>
+              <div class="service-card-footer">
+                <span class="fee-tag" data-i18n="free_schemes">Free with Thalli-Bidda Express</span>
+                <span class="arrow-circle">→</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Active Bookings & Daily Reminders Split Row -->
+          <div class="dashboard-split-row">
+            
+            <!-- Left: Active Bookings Widget -->
+            <div class="glass-card split-col">
+              <div class="widget-head">
+                <div class="head-title">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+                  <h3 data-i18n="active_appointments">Upcoming Home Visits</h3>
+                </div>
+                <button class="btn-text" onclick="window.app.switchTab('book-visit')" data-i18n="book_new">+ Book New</button>
+              </div>
+              <div class="appointments-list" id="dashboardBookingsList">
+                <!-- Dynamically populated by JS -->
+              </div>
+            </div>
+
+            <!-- Right: Today's Medicines Widget -->
+            <div class="glass-card split-col">
+              <div class="widget-head">
+                <div class="head-title">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                  <h3 data-i18n="today_medicines_title">Today's Medicines (మందుల షెడ్యూల్)</h3>
+                </div>
+                <button class="btn-text" onclick="window.app.switchTab('medicine-reminders')" data-i18n="view_all">View All</button>
+              </div>
+              <div class="dashboard-med-list" id="dashboardMedicinesList">
+                <!-- Dynamically populated by JS -->
+              </div>
+            </div>
+
+          </div>
+
+          <!-- Andhra Pradesh Rural Health Schemes & Helpline Info Card -->
+          <div class="ap-banner-card glass-card">
+            <div class="ap-banner-content">
+              <div class="scheme-crest">
+                <span class="crest-txt">AP</span>
+              </div>
+              <div>
+                <h4 data-i18n="ap_govt_collab">Andhra Pradesh Health & Family Welfare Network</h4>
+                <p data-i18n="ap_govt_collab_desc">Arogya Mitra is synced with YSR Village Health Clinics, PHCs, and 104 Mobile Medical Units across all districts.</p>
+              </div>
+            </div>
+            <div class="ap-banner-btn">
+              <button class="btn btn-sm btn-outline-white" onclick="window.app.openEmergencyModal()">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+                <span data-i18n="view_ap_hospitals">Find Nearest PHC / Hospital</span>
+              </button>
+            </div>
+          </div>
+
+        </section>
+
+
+        <!-- =============================================================== -->
+        <!-- TAB 2: BOOK HOME VISITS (ఇంటి వద్ద వైద్య సేవలు) -->
+        <!-- =============================================================== -->
+        <section class="tab-panel" id="tab-book-visit">
+          <div class="tab-header-banner">
+            <div>
+              <h1 class="page-title" data-i18n="book_visit_title">Book Home Healthcare Visit</h1>
+              <p class="page-subtitle" data-i18n="book_visit_sub">Select certified healthcare professionals for visits anywhere in Andhra Pradesh</p>
+            </div>
+            <button class="btn btn-primary" onclick="window.app.openCustomBookingModal()">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg>
+              <span data-i18n="quick_request">Quick Request (1-Minute)</span>
+            </button>
+          </div>
+
+          <!-- Service Category Filter Pills -->
+          <div class="filter-pills-row" id="visitCategoryFilter">
+            <button class="pill-btn active" data-category="all" data-i18n="cat_all">All Specialists</button>
+            <button class="pill-btn" data-category="doctor" data-i18n="cat_doctors">Doctors (వైద్యులు)</button>
+            <button class="pill-btn" data-category="nurse" data-i18n="cat_nurses">Nurses (నర్సులు)</button>
+            <button class="pill-btn" data-category="physio" data-i18n="cat_physio">Physiotherapists</button>
+            <button class="pill-btn" data-category="elder" data-i18n="cat_elder">Elder Attendants</button>
+            <button class="pill-btn" data-category="post-surgery" data-i18n="cat_postsurgery">Post-Surgery Care</button>
+          </div>
+
+          <!-- Search & Filter Bar -->
+          <div class="search-filter-bar glass-card">
+            <div class="search-input-box">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+              <input type="text" id="doctorSearchInput" placeholder="Search doctor, nurse by name, specialty, or village..." data-i18n-placeholder="search_doctor_placeholder">
+            </div>
+            <div class="district-filter-select">
+              <select id="districtFilterSelect">
+                <option value="all">All AP Districts</option>
+                <option value="Krishna" selected>Krishna (Vijayawada / Machilipatnam)</option>
+                <option value="Guntur">Guntur (Tenali / Mangalagiri)</option>
+                <option value="Visakhapatnam">Visakhapatnam (Anakapalli / Bheemili)</option>
+                <option value="Tirupati">Tirupati / Chittoor</option>
+                <option value="Kurnool">Kurnool / Nandyal</option>
+                <option value="East Godavari">East Godavari (Kakinada / Rajahmundry)</option>
+                <option value="West Godavari">West Godavari (Eluru / Bhimavaram)</option>
+                <option value="Nellore">SPSR Nellore</option>
+                <option value="Anantapur">Anantapur / Sri Sathya Sai</option>
+                <option value="Kadapa">YSR Kadapa</option>
+                <option value="Prakasam">Prakasam (Ongole)</option>
+                <option value="Srikakulam">Srikakulam</option>
+                <option value="Vizianagaram">Vizianagaram</option>
+              </select>
+            </div>
+          </div>
+
+          <!-- Professional Listing Grid -->
+          <div class="providers-grid" id="providersListingContainer">
+            <!-- Dynamic provider cards injected by app.js -->
+          </div>
+
+          <!-- Active Visits Management Table -->
+          <div class="booked-visits-section glass-card">
+            <h3 class="section-title" data-i18n="my_booked_visits">My Booked Home Visits & History</h3>
+            <div class="table-responsive">
+              <table class="data-table" id="myVisitsTable">
+                <thead>
+                  <tr>
+                    <th data-i18n="th_booking_id">Booking ID</th>
+                    <th data-i18n="th_specialist">Healthcare Provider</th>
+                    <th data-i18n="th_service">Service Type</th>
+                    <th data-i18n="th_datetime">Date & Time Slot</th>
+                    <th data-i18n="th_address">Village / Address</th>
+                    <th data-i18n="th_status">Status</th>
+                    <th data-i18n="th_actions">Action</th>
+                  </tr>
+                </thead>
+                <tbody id="myVisitsTableBody">
+                  <!-- Populated dynamically -->
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </section>
+
+
+        <!-- =============================================================== -->
+        <!-- TAB 3: MEDICINE REMINDERS (మందుల రిమైండర్లు & ప్రిస్క్రిప్షన్) -->
+        <!-- =============================================================== -->
+        <section class="tab-panel" id="tab-medicine-reminders">
+          <div class="tab-header-banner">
+            <div>
+              <h1 class="page-title" data-i18n="medicine_reminder_title">Medicine Reminders & Tracker</h1>
+              <p class="page-subtitle" data-i18n="medicine_reminder_sub">Never miss a dose. Track daily pills, meal timings, and prescription refills.</p>
+            </div>
+            <div class="header-action-group">
+              <button class="btn btn-secondary" id="testAlarmSoundBtn" title="Test audio reminder chime">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"/></svg>
+                <span data-i18n="test_alarm">Test Reminder Sound</span>
+              </button>
+              <button class="btn btn-primary" onclick="window.app.openAddMedicineModal()">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg>
+                <span data-i18n="add_medicine_btn">+ Add Medicine</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- Daily Schedule Tracker Stats -->
+          <div class="tracker-summary-grid">
+            <div class="tracker-card glass-card">
+              <div class="tracker-icon icon-emerald"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg></div>
+              <div>
+                <span class="tracker-num" id="medTakenCount">2</span>
+                <span class="tracker-label" data-i18n="doses_taken">Doses Taken Today</span>
+              </div>
+            </div>
+            <div class="tracker-card glass-card">
+              <div class="tracker-icon icon-amber"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div>
+              <div>
+                <span class="tracker-num" id="medPendingCount">2</span>
+                <span class="tracker-label" data-i18n="doses_pending">Doses Remaining</span>
+              </div>
+            </div>
+            <div class="tracker-card glass-card">
+              <div class="tracker-icon icon-blue"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 20V10M12 20V4M6 20v-6"/></svg></div>
+              <div>
+                <span class="tracker-num">94%</span>
+                <span class="tracker-label" data-i18n="adherence_rate">Monthly Adherence</span>
+              </div>
+            </div>
+            <div class="tracker-card glass-card">
+              <div class="tracker-icon icon-coral"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+              <div>
+                <span class="tracker-num text-danger" id="medRefillAlertCount">1</span>
+                <span class="tracker-label" data-i18n="refill_alert_label">Pills Low on Stock</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Time-slot Segments (Morning, Afternoon, Night) -->
+          <div class="medicine-schedule-container">
+            
+            <!-- Morning Slot -->
+            <div class="time-slot-card glass-card" id="slotMorning">
+              <div class="slot-header">
+                <div class="slot-title">
+                  <span class="slot-badge morning-badge">🌅 <span data-i18n="morning_slot">Morning (ఉదయం)</span></span>
+                  <span class="slot-time">08:00 AM - 10:00 AM</span>
+                </div>
+              </div>
+              <div class="medicine-items-list" id="morningMedsList">
+                <!-- Dynamically populated -->
+              </div>
+            </div>
+
+            <!-- Afternoon Slot -->
+            <div class="time-slot-card glass-card" id="slotAfternoon">
+              <div class="slot-header">
+                <div class="slot-title">
+                  <span class="slot-badge afternoon-badge">☀️ <span data-i18n="afternoon_slot">Afternoon (మధ్యాహ్నం)</span></span>
+                  <span class="slot-time">01:00 PM - 02:30 PM</span>
+                </div>
+              </div>
+              <div class="medicine-items-list" id="afternoonMedsList">
+                <!-- Dynamically populated -->
+              </div>
+            </div>
+
+            <!-- Night Slot -->
+            <div class="time-slot-card glass-card" id="slotNight">
+              <div class="slot-header">
+                <div class="slot-title">
+                  <span class="slot-badge night-badge">🌙 <span data-i18n="night_slot">Night (రాత్రి)</span></span>
+                  <span class="slot-time">08:00 PM - 10:00 PM</span>
+                </div>
+              </div>
+              <div class="medicine-items-list" id="nightMedsList">
+                <!-- Dynamically populated -->
+              </div>
+            </div>
+
+          </div>
+
+          <!-- Prescription Tracking & Pharmacy Refill Box -->
+          <div class="prescription-refill-card glass-card">
+            <div class="refill-info">
+              <div class="refill-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+              </div>
+              <div>
+                <h3 data-i18n="rx_refill_title">Village Pharmacy / Jana Aushadhi Refill Support</h3>
+                <p data-i18n="rx_refill_desc">Get your generic medicines delivered via Grama Sachivalayam / Arogya Mitra partner pharmacies at 80% lower cost.</p>
+              </div>
+            </div>
+            <button class="btn btn-outline-emerald" onclick="window.app.triggerPharmacyRefill()">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
+              <span data-i18n="order_refill_btn">Request Doorstep Refill</span>
+            </button>
+          </div>
+        </section>
+
+
+        <!-- =============================================================== -->
+        <!-- TAB 4: TELECONSULTATION & QUICK DOCTOR CHAT -->
+        <!-- =============================================================== -->
+        <section class="tab-panel" id="tab-teleconsult">
+          <div class="tab-header-banner">
+            <div>
+              <h1 class="page-title" data-i18n="teleconsult_title">Teleconsultation & Doctor Video Call</h1>
+              <p class="page-subtitle" data-i18n="teleconsult_sub">Connect with certified MBBS doctors and specialists in seconds via video or chat</p>
+            </div>
+            <button class="btn btn-danger-pulse" onclick="window.app.startDirectTeleconsult('Dr. Y. Radhika, MD (General Medicine)')">
+              <span class="live-dot"></span>
+              <span data-i18n="instant_connect">Connect with Doctor Now (Live)</span>
+            </button>
+          </div>
+
+          <!-- Doctors Available Online Grid -->
+          <div class="tele-doctors-grid" id="teleDoctorsGrid">
+            <!-- Populated by JS -->
+          </div>
+
+          <!-- Video Consultation Studio Preview / Active Call Container -->
+          <div class="tele-call-room glass-card" id="teleCallRoom" style="display: none;">
+            <div class="room-header">
+              <div class="room-doctor-meta">
+                <div class="live-indicator"><span class="pulse-dot"></span> <span data-i18n="call_connected">Live Call Connected</span></div>
+                <h3 id="activeDoctorName">Dr. Y. Radhika, MD (General Medicine)</h3>
+                <span class="call-timer" id="callTimer">00:45</span>
+              </div>
+              <button class="btn-sm btn-outline-danger" onclick="window.app.endTeleconsult()">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10.68 13.31a16 16 0 0 0 3.41 2.6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7 2 2 0 0 1 1.72 2v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.42 19.42 0 0 1-3.33-2.67m-2.67-3.34a19.79 19.79 0 0 1-3.07-8.63A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91"/></svg>
+                <span data-i18n="end_call">End Call</span>
+              </button>
+            </div>
+
+            <div class="video-grid-layout">
+              <!-- Doctor Video Screen -->
+              <div class="video-screen doctor-screen">
+                <div class="simulated-doctor-view" id="simulatedDoctorView">
+                  <div class="doc-avatar-pulse">
+                    <img src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 120'><circle cx='60' cy='60' r='58' fill='%23059669'/><path d='M60 25a20 20 0 1 0 0 40 20 20 0 0 0 0-40zm0 46c-22 0-40 14-40 31v6h80v-6c0-17-18-31-40-31z' fill='%23ffffff'/><circle cx='60' cy='60' r='58' stroke='%2334d399' stroke-width='4' fill='none'/></svg>" alt="Doctor Video">
+                  </div>
+                  <div class="doc-speech-bubble" id="docLiveSpeech">
+                    "నమస్కారం రమేష్ గారు, మీ రక్తపోటు (BP) మరియు ప్రస్తుత లక్షణాలు ఎలా ఉన్నాయో చెప్పండి."
+                  </div>
+                </div>
+                <div class="screen-tag" id="doctorScreenTag">Dr. Y. Radhika (AP Tele-Health)</div>
+              </div>
+
+              <!-- Self / Patient Cam Screen -->
+              <div class="video-screen patient-screen">
+                <video id="patientWebcamVideo" autoplay playsinline muted></video>
+                <div class="cam-placeholder" id="camPlaceholder">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M23 7l-7 5 7 5V7z"/><rect x="1" y="5" width="15" height="14" rx="2" ry="2"/></svg>
+                  <span>Patient Camera (Self)</span>
+                </div>
+                <div class="screen-tag">You (Patient)</div>
+              </div>
+            </div>
+
+            <!-- In-Call Controls -->
+            <div class="call-controls-bar">
+              <button class="call-ctrl-btn" id="toggleMicBtn" title="Mute/Unmute Mic" onclick="window.app.toggleMic()">
+                <svg id="micIcon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" y1="19" x2="12" y2="23"/><line x1="8" y1="23" x2="16" y2="23"/></svg>
+              </button>
+              <button class="call-ctrl-btn" id="toggleCamBtn" title="Turn Camera On/Off" onclick="window.app.toggleCamera()">
+                <svg id="camIcon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2" ry="2"/></svg>
+              </button>
+              <button class="call-ctrl-btn btn-call-hangup" title="End Teleconsultation" onclick="window.app.endTeleconsult()">
+                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 9c-1.6 0-3.15.25-4.6.72v3.1c0 .39-.23.74-.56.9-.98.49-1.87 1.12-2.66 1.85-.18.18-.43.28-.7.28-.28 0-.53-.11-.71-.29L.29 13.08c-.18-.17-.29-.42-.29-.7 0-.28.11-.53.29-.71C3.34 8.78 7.46 7 12 7s8.66 1.78 11.71 4.67c.18.18.29.43.29.71 0 .28-.11.53-.29.71l-2.48 2.48c-.18.18-.43.29-.71.29-.27 0-.52-.11-.7-.28-.79-.74-1.69-1.36-2.67-1.85-.33-.16-.56-.5-.56-.9v-3.1C15.15 9.25 13.6 9 12 9z"/></svg>
+              </button>
+            </div>
+
+            <!-- In-Call Real-Time Chat & Prescription Notepad -->
+            <div class="call-bottom-split">
+              <!-- Live Chat with Doctor -->
+              <div class="call-chat-box">
+                <h4 data-i18n="live_chat_title">Live Consultation Chat</h4>
+                <div class="chat-messages-flow" id="teleChatFlow">
+                  <div class="msg doc-msg">
+                    <div class="msg-author">Dr. Y. Radhika • 10:02 AM</div>
+                    <div class="msg-bubble">నమస్కారం రమేష్ గారు, మీ తలనొప్పి మరియు బీపీ ఎప్పటినుండి ఉన్నాయి? (Hello Ramesh, since when are you having headache & BP issues?)</div>
+                  </div>
+                </div>
+                <div class="chat-input-bar">
+                  <input type="text" id="teleChatInput" placeholder="Type your message / లక్షణాలు రాయండి..." onkeypress="if(event.key === 'Enter') window.app.sendTeleMessage()">
+                  <button class="btn btn-sm btn-primary" onclick="window.app.sendTeleMessage()">Send</button>
+                </div>
+              </div>
+
+              <!-- Instant RX Generated Notes -->
+              <div class="rx-live-pad">
+                <div class="rx-header">
+                  <div class="rx-symbol">℞</div>
+                  <div>
+                    <h4 data-i18n="live_prescription">Digital Prescription (ఈ-ప్రిస్క్రిప్షన్)</h4>
+                    <small>Generated in consultation • Ready for download</small>
+                  </div>
+                </div>
+                <div class="rx-content-preview" id="liveRxContent">
+                  <p><strong>Diagnosis:</strong> Mild Hypertension & Seasonal Fatigue</p>
+                  <ul>
+                    <li>1. Tab Telmisartan 40mg — 1 OD (Morning after food) x 30 Days</li>
+                    <li>2. Tab Neurobion Forte — 1 OD (Night after food) x 15 Days</li>
+                    <li>3. Low Salt Diet & 30 min brisk walking daily.</li>
+                  </ul>
+                </div>
+                <button class="btn btn-sm btn-outline-emerald full-width" onclick="window.app.downloadRx()">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                  <span data-i18n="download_rx">Download PDF Prescription</span>
+                </button>
+              </div>
+            </div>
+
+          </div>
+        </section>
+
+
+        <!-- =============================================================== -->
+        <!-- TAB 5: HEALTH RECORDS (AAROGYA VAULT) -->
+        <!-- =============================================================== -->
+        <section class="tab-panel" id="tab-health-records">
+          <div class="tab-header-banner">
+            <div>
+              <h1 class="page-title" data-i18n="health_vault_title">Aarogya Vault — Health Records</h1>
+              <p class="page-subtitle" data-i18n="health_vault_sub">Securely store and share prescriptions, lab reports, vaccination cards, and hospital discharge summaries.</p>
+            </div>
+            <button class="btn btn-primary" onclick="window.app.openUploadRecordModal()">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+              <span data-i18n="upload_record_btn">+ Upload New Record</span>
+            </button>
+          </div>
+
+          <!-- Category filter buttons -->
+          <div class="filter-pills-row" id="recordCategoryFilter">
+            <button class="pill-btn active" data-category="all" data-i18n="rec_all">All Records (అన్నీ)</button>
+            <button class="pill-btn" data-category="prescription" data-i18n="rec_prescriptions">Prescriptions (ప్రిస్క్రిప్షన్లు)</button>
+            <button class="pill-btn" data-category="lab" data-i18n="rec_lab">Lab & Blood Reports (ల్యాబ్ రిపోర్టులు)</button>
+            <button class="pill-btn" data-category="vaccine" data-i18n="rec_vaccine">Vaccination (టీకాలు)</button>
+            <button class="pill-btn" data-category="discharge" data-i18n="rec_discharge">Hospital Summaries</button>
+          </div>
+
+          <!-- Record Search & Grid -->
+          <div class="records-grid-container" id="recordsGrid">
+            <!-- Dynamic record cards inserted by app.js -->
+          </div>
+        </section>
+
+
+        <!-- =============================================================== -->
+        <!-- TAB 6: HOME DIAGNOSTICS & LAB TESTS -->
+        <!-- =============================================================== -->
+        <section class="tab-panel" id="tab-home-diagnostics">
+          <div class="tab-header-banner">
+            <div>
+              <h1 class="page-title" data-i18n="diagnostics_title">Home Diagnostics & Portable ECG</h1>
+              <p class="page-subtitle" data-i18n="diagnostics_sub">Certified phlebotomists collect samples at your doorstep. Reports delivered on WhatsApp & App within 6 hours.</p>
+            </div>
+            <button class="btn btn-secondary" onclick="window.app.switchTab('health-records')">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/></svg>
+              <span data-i18n="view_past_reports">View Past Lab Reports</span>
+            </button>
+          </div>
+
+          <!-- Lab Packages Grid -->
+          <div class="packages-grid" id="diagPackagesGrid">
+            <!-- Populated dynamically by app.js -->
+          </div>
+
+          <!-- Individual Tests Checklist -->
+          <div class="single-tests-section glass-card">
+            <h3 class="section-title" data-i18n="individual_tests_title">Individual Routine & Blood Tests</h3>
+            <div class="tests-checklist-grid" id="individualTestsGrid">
+              <!-- Dynamically populated -->
+            </div>
+          </div>
+        </section>
+
+
+        <!-- =============================================================== -->
+        <!-- TAB 7: MATERNAL & CHILD CARE (తల్లి & బిడ్డ సంరక్షణ) -->
+        <!-- =============================================================== -->
+        <section class="tab-panel" id="tab-maternal-child">
+          <div class="tab-header-banner">
+            <div>
+              <h1 class="page-title" data-i18n="maternal_title">Maternal & Child Care (తల్లి & బిడ్డ సంరక్షణ)</h1>
+              <p class="page-subtitle" data-i18n="maternal_sub">Pregnancy week tracking, ANC checkups, nutrition guides, and 0-5 years child immunization schedule.</p>
+            </div>
+            <a href="tel:102" class="btn btn-rose">
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+              <span data-i18n="call_102_btn">Call 102 (Thalli-Bidda Express)</span>
+            </a>
+          </div>
+
+          <div class="maternal-tabs-wrapper">
+            <div class="sub-tab-pills">
+              <button class="sub-pill active" data-subtab="maternal-tracker" data-i18n="sub_pregnancy">Pregnancy Tracker (గర్భిణీ సంరక్షణ)</button>
+              <button class="sub-pill" data-subtab="child-vaccine" data-i18n="sub_vaccine">Child Vaccine Schedule (టీకాల పట్టిక)</button>
+            </div>
+
+            <!-- Subtab 1: Pregnancy Tracker -->
+            <div class="subtab-content active" id="subtab-maternal-tracker">
+              <div class="pregnancy-card glass-card">
+                <div class="pregnancy-header">
+                  <div class="mother-badge">
+                    <span class="pulse-dot"></span>
+                    <span data-i18n="week_28">28th Week • 3rd Trimester</span>
+                  </div>
+                  <span class="edd-date" data-i18n="due_date_text">Estimated Due Date: 18 Nov, 2026</span>
+                </div>
+                <div class="progress-bar-container">
+                  <div class="progress-bar-fill" style="width: 70%;"></div>
+                </div>
+                <div class="trimester-steps">
+                  <span class="step-done">1st Trimester ✓</span>
+                  <span class="step-done">2nd Trimester ✓</span>
+                  <span class="step-active">3rd Trimester (Active)</span>
+                </div>
+
+                <div class="anc-visits-grid">
+                  <div class="anc-card done">
+                    <div class="anc-status">✓ Completed</div>
+                    <h4>1st ANC Checkup (8-12 Wks)</h4>
+                    <p>Blood group, Hb, Ultrasound Scan, TT-1 Injection</p>
+                  </div>
+                  <div class="anc-card done">
+                    <div class="anc-status">✓ Completed</div>
+                    <h4>2nd ANC Checkup (14-26 Wks)</h4>
+                    <p>Anomaly scan, Glucose tolerance, TT-2 booster</p>
+                  </div>
+                  <div class="anc-card current">
+                    <div class="anc-status highlight">⚡ Due This Week</div>
+                    <h4>3rd ANC Checkup (28-34 Wks)</h4>
+                    <p>Fetal growth check, BP monitoring, IFA tablets refill</p>
+                    <button class="btn btn-sm btn-primary" onclick="window.app.startServiceBooking('nurse')" data-i18n="book_anm_visit">Book ANM Home Visit</button>
+                  </div>
+                  <div class="anc-card">
+                    <div class="anc-status">Upcoming</div>
+                    <h4>4th ANC Checkup (36 Wks+)</h4>
+                    <p>Birth preparedness & hospital admission planning</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Subtab 2: Child Vaccine Schedule -->
+            <div class="subtab-content" id="subtab-child-vaccine">
+              <div class="vaccine-schedule-card glass-card">
+                <div class="vaccine-calc-header">
+                  <div>
+                    <h3 data-i18n="child_immunization_title">National Universal Immunization Programme (UIP AP)</h3>
+                    <p data-i18n="child_immunization_sub">Check due dates for your baby's lifesaving vaccines from birth to 5 years.</p>
+                  </div>
+                  <div class="baby-dob-input">
+                    <label data-i18n="baby_dob_label">Baby's Date of Birth:</label>
+                    <input type="date" id="babyDobPicker" value="2026-01-15" onchange="window.app.recalculateVaccines()">
+                  </div>
+                </div>
+
+                <div class="vaccines-timeline" id="vaccinesTimelineList">
+                  <!-- Generated dynamically based on DOB -->
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+
+        <!-- =============================================================== -->
+        <!-- TAB 8: ELDER CARE & DAILY VITALS (వయోవృద్ధుల సంరక్షణ) -->
+        <!-- =============================================================== -->
+        <section class="tab-panel" id="tab-elder-care">
+          <div class="tab-header-banner">
+            <div>
+              <h1 class="page-title" data-i18n="elder_title">Elder Care & Daily Vitals Tracker</h1>
+              <p class="page-subtitle" data-i18n="elder_sub">Dedicated caregivers for senior citizens, routine vital stats logging, and emergency family alert triggers.</p>
+            </div>
+            <button class="btn btn-primary" onclick="window.app.openCaregiverBookingModal()">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+              <span data-i18n="book_caregiver_btn">Book Elder Caregiver</span>
+            </button>
+          </div>
+
+          <!-- Vitals Input & Diagnostic Station -->
+          <div class="vitals-station-card glass-card">
+            <div class="vitals-header">
+              <h3 data-i18n="log_vitals_title">Quick Vitals Check Station (వైటల్స్ రికార్డ్ చేయండి)</h3>
+              <span class="vitals-timestamp" id="vitalsTimestamp">Today, 04:30 PM</span>
+            </div>
+            
+            <form id="vitalsLogForm" onsubmit="window.app.saveVitals(event)">
+              <div class="vitals-inputs-grid">
+                <!-- Blood Pressure -->
+                <div class="vital-field-card">
+                  <div class="vital-icon-circle icon-coral">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+                  </div>
+                  <div class="vital-data">
+                    <label data-i18n="label_bp">Blood Pressure (BP)</label>
+                    <div class="input-unit-wrap">
+                      <input type="number" id="bpSystolic" placeholder="120" value="120" min="60" max="250">
+                      <span>/</span>
+                      <input type="number" id="bpDiastolic" placeholder="80" value="80" min="40" max="150">
+                      <span class="unit">mmHg</span>
+                    </div>
+                    <span class="status-indicator text-success" id="bpStatusTag">Normal Range</span>
+                  </div>
+                </div>
+
+                <!-- Blood Sugar -->
+                <div class="vital-field-card">
+                  <div class="vital-icon-circle icon-amber">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 2v6m0 8v6M4.93 4.93l4.24 4.24m5.66 5.66l4.24 4.24M2 12h6m8 0h6M4.93 19.07l4.24-4.24m5.66-5.66l4.24-4.24"/></svg>
+                  </div>
+                  <div class="vital-data">
+                    <label data-i18n="label_sugar">Blood Glucose (Fasting / PP)</label>
+                    <div class="input-unit-wrap">
+                      <input type="number" id="bloodSugarInput" placeholder="110" value="110" min="40" max="500">
+                      <span class="unit">mg/dL</span>
+                    </div>
+                    <span class="status-indicator text-success" id="sugarStatusTag">Optimal</span>
+                  </div>
+                </div>
+
+                <!-- Oxygen SpO2 -->
+                <div class="vital-field-card">
+                  <div class="vital-icon-circle icon-blue">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z"/></svg>
+                  </div>
+                  <div class="vital-data">
+                    <label data-i18n="label_spo2">Oxygen Saturation (SpO2)</label>
+                    <div class="input-unit-wrap">
+                      <input type="number" id="spo2Input" placeholder="98" value="98" min="70" max="100">
+                      <span class="unit">%</span>
+                    </div>
+                    <span class="status-indicator text-success" id="spo2StatusTag">Healthy</span>
+                  </div>
+                </div>
+
+                <!-- Pulse Rate -->
+                <div class="vital-field-card">
+                  <div class="vital-icon-circle icon-emerald">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+                  </div>
+                  <div class="vital-data">
+                    <label data-i18n="label_pulse">Heart Pulse Rate</label>
+                    <div class="input-unit-wrap">
+                      <input type="number" id="pulseInput" placeholder="72" value="72" min="40" max="200">
+                      <span class="unit">bpm</span>
+                    </div>
+                    <span class="status-indicator text-success" id="pulseStatusTag">Normal</span>
+                  </div>
+                </div>
+              </div>
+
+              <div class="vitals-btn-row">
+                <button type="submit" class="btn btn-primary">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+                  <span data-i18n="save_vitals_btn">Save & Analyze Health Status</span>
+                </button>
+              </div>
+            </form>
+          </div>
+
+          <!-- Elder Care Services Grid -->
+          <h3 class="section-title" data-i18n="elder_packages_title">Specialized Caregiver & Assistance Packages</h3>
+          <div class="elder-care-grid">
+            <div class="elder-pack-card glass-card">
+              <div class="pack-badge" data-i18n="pack_day">Day Shift (10 Hours)</div>
+              <h3>Senior Day Attendant</h3>
+              <p>Assistance with bathing, grooming, medication reminder, feeding, and light walking support in your home.</p>
+              <div class="pack-price">₹750 <small>/ Day</small></div>
+              <button class="btn btn-outline-emerald full-width" onclick="window.app.startCaregiverBooking('Senior Day Attendant', 750)">Book Attendant</button>
+            </div>
+
+            <div class="elder-pack-card glass-card featured">
+              <div class="pack-badge popular" data-i18n="pack_247">24x7 Live-in Support</div>
+              <h3>24/7 Dedicated Caregiver</h3>
+              <p>Round-the-clock bedside nursing assistance, vitals logging, diaper change, night monitoring, and doctor coordination.</p>
+              <div class="pack-price">₹1,400 <small>/ Day</small></div>
+              <button class="btn btn-primary full-width" onclick="window.app.startCaregiverBooking('24/7 Dedicated Caregiver', 1400)">Book 24/7 Caregiver</button>
+            </div>
+
+            <div class="elder-pack-card glass-card">
+              <div class="pack-badge" data-i18n="pack_rehab">Paralysis / Post-Stroke</div>
+              <h3>Stroke & Neuro Rehab Care</h3>
+              <p>Physiotherapist + Nursing care for stroke rehabilitation, range of motion exercises, and bedridden patient hygiene.</p>
+              <div class="pack-price">₹1,800 <small>/ Day</small></div>
+              <button class="btn btn-outline-emerald full-width" onclick="window.app.startCaregiverBooking('Stroke & Neuro Rehab Care', 1800)">Book Rehab Support</button>
+            </div>
+          </div>
+        </section>
+
+      </main>
+    </div>
+
+    <!-- Mobile Bottom Navigation Bar (App Bar) -->
+    <nav class="mobile-bottom-nav">
+      <button class="bnav-item active" data-tab="dashboard">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+        <span data-i18n="nav_home">Home</span>
+      </button>
+      <button class="bnav-item" data-tab="book-visit">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+        <span data-i18n="nav_visit">Visits</span>
+      </button>
+      <button class="bnav-item" data-tab="medicine-reminders">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+        <span data-i18n="nav_medicines">Medicines</span>
+      </button>
+      <button class="bnav-item" data-tab="teleconsult">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2" ry="2"/></svg>
+        <span data-i18n="nav_teleconsult">Doctor</span>
+      </button>
+      <button class="bnav-item" data-tab="health-records">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+        <span data-i18n="nav_records">Vault</span>
+      </button>
+    </nav>
+
+  </div> <!-- End .app-layout -->
+
+
+  <!-- =============================================================== -->
+  <!-- MODALS & DIALOGS -->
+  <!-- =============================================================== -->
+
+  <!-- 1. HOME VISIT BOOKING WIZARD MODAL -->
+  <div class="modal-backdrop" id="bookingWizardModal">
+    <div class="modal-dialog glass-card">
       <div class="modal-header">
-        <h3>Edit Task</h3>
-        <button id="modal-close-btn" class="icon-btn modal-close" aria-label="Close modal">&times;</button>
+        <div class="modal-title-wrap">
+          <div class="modal-badge-icon icon-emerald"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></div>
+          <div>
+            <h3 id="bookingModalTitle" data-i18n="modal_book_title">Book Healthcare Home Visit</h3>
+            <p id="bookingModalSub" data-i18n="modal_book_sub">Certified specialist visit to your doorstep in AP</p>
+          </div>
+        </div>
+        <button class="close-modal-btn" onclick="window.app.closeModal('bookingWizardModal')">&times;</button>
       </div>
-      <form id="edit-form">
-        <input type="hidden" id="edit-task-id" />
+
+      <form id="homeVisitBookingForm" onsubmit="window.app.confirmBooking(event)">
         <div class="modal-body">
-          <div class="form-group">
-            <label for="edit-title-input">Task Title</label>
-            <input type="text" id="edit-title-input" required maxlength="120" />
-          </div>
-          <div class="form-grid">
-            <div class="form-group">
-              <label for="edit-category-select">Category</label>
-              <select id="edit-category-select">
-                <option value="Personal">Personal</option>
-                <option value="Work">Work</option>
-                <option value="Study">Study</option>
-                <option value="Health">Health</option>
-                <option value="Finance">Finance</option>
-                <option value="Ideas">Ideas</option>
+          
+          <!-- Step 1: Specialist & Service Details -->
+          <div class="form-row">
+            <div class="form-group flex-2">
+              <label data-i18n="form_service_type">Service Requested</label>
+              <select id="modalServiceType" required>
+                <option value="Doctor Consultation (వైద్యుల సంప్రదింపులు)">Doctor Consultation (వైద్యుల సంప్రదింపులు)</option>
+                <option value="Home Nursing & Injection (నర్సింగ్ సేవలు)">Home Nursing & Injection (నర్సింగ్ సేవలు)</option>
+                <option value="Physiotherapy Rehabilitation (ఫిజియోథెరపీ)">Physiotherapy Rehabilitation (ఫిజియోథెరపీ)</option>
+                <option value="Elder Attendant Care (వృద్ధుల సంరక్షణ)">Elder Attendant Care (వృద్ధుల సంరక్షణ)</option>
+                <option value="Post-Surgery Wound Dressing (శస్త్రచికిత్స అనంతర సంరక్షణ)">Post-Surgery Wound Dressing</option>
               </select>
             </div>
-            <div class="form-group">
-              <label for="edit-priority-select">Priority</label>
-              <select id="edit-priority-select">
-                <option value="High">High</option>
-                <option value="Medium">Medium</option>
-                <option value="Low">Low</option>
+            <div class="form-group flex-1">
+              <label data-i18n="form_pref_doc">Preferred Specialist</label>
+              <input type="text" id="modalSpecialistName" value="Available Nearest Doctor / Nurse">
+            </div>
+          </div>
+
+          <!-- Step 2: Patient Info -->
+          <div class="form-row">
+            <div class="form-group flex-2">
+              <label data-i18n="form_patient_name">Patient Full Name</label>
+              <input type="text" id="bookingPatientName" required placeholder="e.g. Ramesh Garu / రమేష్" value="Ramesh Garu">
+            </div>
+            <div class="form-group flex-1">
+              <label data-i18n="form_patient_age">Age / Gender</label>
+              <input type="text" id="bookingPatientAge" placeholder="58 / Male" value="58 / M">
+            </div>
+            <div class="form-group flex-1">
+              <label data-i18n="form_mobile">Mobile Number</label>
+              <input type="tel" id="bookingMobile" required placeholder="9876543210" value="9848012345">
+            </div>
+          </div>
+
+          <!-- Step 3: AP Address / Mandal & Village -->
+          <div class="form-row">
+            <div class="form-group flex-1">
+              <label data-i18n="form_district">AP District</label>
+              <select id="bookingDistrict" required>
+                <option value="Krishna">Krishna (Vijayawada / Machilipatnam)</option>
+                <option value="Guntur">Guntur (Tenali / Mangalagiri)</option>
+                <option value="Visakhapatnam">Visakhapatnam</option>
+                <option value="Tirupati">Tirupati / Chittoor</option>
+                <option value="Kurnool">Kurnool / Nandyal</option>
+                <option value="East Godavari">East Godavari (Kakinada / Rajahmundry)</option>
+                <option value="West Godavari">West Godavari (Eluru)</option>
+                <option value="Nellore">SPSR Nellore</option>
+                <option value="Anantapur">Anantapur</option>
+                <option value="Kadapa">YSR Kadapa</option>
+                <option value="Prakasam">Prakasam</option>
+                <option value="Srikakulam">Srikakulam</option>
+                <option value="Vizianagaram">Vizianagaram</option>
+              </select>
+            </div>
+            <div class="form-group flex-2">
+              <label data-i18n="form_village_address">Village / Town & House Landmark</label>
+              <input type="text" id="bookingAddress" required placeholder="Gollapudi Village, Near Panchayat Office, House 3-45" value="Gollapudi Village, Near Rama Temple">
+            </div>
+          </div>
+
+          <!-- Step 4: Date & Slot -->
+          <div class="form-row">
+            <div class="form-group flex-1">
+              <label data-i18n="form_date">Preferred Visit Date</label>
+              <input type="date" id="bookingDate" required>
+            </div>
+            <div class="form-group flex-1">
+              <label data-i18n="form_time_slot">Preferred Time Slot</label>
+              <select id="bookingSlot" required>
+                <option value="Morning (08:30 AM - 11:30 AM)">Morning (08:30 AM - 11:30 AM)</option>
+                <option value="Afternoon (02:00 PM - 04:30 PM)">Afternoon (02:00 PM - 04:30 PM)</option>
+                <option value="Evening (05:30 PM - 08:30 PM)">Evening (05:30 PM - 08:30 PM)</option>
+              </select>
+            </div>
+            <div class="form-group flex-1">
+              <label data-i18n="form_payment_mode">Payment Option</label>
+              <select id="bookingPaymentMode">
+                <option value="Pay After Visit (Cash/UPI)">Pay After Visit (Cash / UPI)</option>
+                <option value="Aarogyasri Health Card (Free)">Aarogyasri Health Card (Free / Subsidized)</option>
+                <option value="Instant UPI (GPay / PhonePe)">Instant UPI (GPay / PhonePe)</option>
               </select>
             </div>
           </div>
+
+          <!-- Symptom Description -->
           <div class="form-group">
-            <label for="edit-due-date-input">Due Date</label>
-            <input type="date" id="edit-due-date-input" />
+            <label data-i18n="form_symptoms">Describe Symptoms / Specific Need (లక్షణాలు)</label>
+            <textarea id="bookingSymptoms" rows="2" placeholder="e.g. High fever for 2 days, need BP check and medicine prescription..."></textarea>
           </div>
+
         </div>
         <div class="modal-footer">
-          <button type="button" id="modal-cancel-btn" class="btn btn-secondary">Cancel</button>
-          <button type="submit" class="btn btn-primary">Save Changes</button>
+          <button type="button" class="btn btn-secondary" onclick="window.app.closeModal('bookingWizardModal')" data-i18n="btn_cancel">Cancel</button>
+          <button type="submit" class="btn btn-primary">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+            <span data-i18n="btn_confirm_booking">Confirm & Generate Booking Pass</span>
+          </button>
         </div>
       </form>
     </div>
   </div>
 
+
+  <!-- 2. BOOKING CONFIRMATION DIGITAL PASS MODAL -->
+  <div class="modal-backdrop" id="bookingPassModal">
+    <div class="modal-dialog glass-card modal-pass-card">
+      <div class="modal-header header-success">
+        <div class="modal-title-wrap">
+          <div class="modal-badge-icon icon-success"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg></div>
+          <div>
+            <h3 data-i18n="pass_confirmed_title">Home Visit Confirmed!</h3>
+            <p data-i18n="pass_confirmed_sub">Healthcare professional dispatched to your village</p>
+          </div>
+        </div>
+        <button class="close-modal-btn" onclick="window.app.closeModal('bookingPassModal')">&times;</button>
+      </div>
+      <div class="modal-body pass-body" id="bookingPassContent">
+        <!-- Injected by app.js -->
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-outline-emerald" onclick="window.print()">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>
+          <span data-i18n="print_pass">Print / Save Pass</span>
+        </button>
+        <button class="btn btn-primary" onclick="window.app.closeModal('bookingPassModal'); window.app.switchTab('book-visit');">
+          <span data-i18n="done_btn">Done</span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- 3. ADD MEDICINE REMINDER MODAL -->
+  <div class="modal-backdrop" id="addMedicineModal">
+    <div class="modal-dialog glass-card">
+      <div class="modal-header">
+        <div class="modal-title-wrap">
+          <div class="modal-badge-icon icon-amber"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div>
+          <div>
+            <h3 data-i18n="modal_add_med_title">Add Medication Reminder</h3>
+            <p data-i18n="modal_add_med_sub">Set pill schedules and refill notifications</p>
+          </div>
+        </div>
+        <button class="close-modal-btn" onclick="window.app.closeModal('addMedicineModal')">&times;</button>
+      </div>
+      <form id="addMedicineForm" onsubmit="window.app.saveNewMedicine(event)">
+        <div class="modal-body">
+          <div class="form-row">
+            <div class="form-group flex-2">
+              <label data-i18n="med_name_label">Medicine / Tablet Name</label>
+              <input type="text" id="newMedName" required placeholder="e.g. Metformin / Paracetamol / Telmisartan">
+            </div>
+            <div class="form-group flex-1">
+              <label data-i18n="med_dosage_label">Dosage</label>
+              <input type="text" id="newMedDosage" required placeholder="e.g. 500mg / 1 Tab" value="1 Tablet">
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group flex-1">
+              <label data-i18n="med_timing_slot">Time Slot</label>
+              <select id="newMedSlot" required>
+                <option value="morning">Morning (08:00 AM)</option>
+                <option value="afternoon">Afternoon (01:30 PM)</option>
+                <option value="night">Night (08:30 PM)</option>
+              </select>
+            </div>
+            <div class="form-group flex-1">
+              <label data-i18n="med_meal_relation">Meal Timing</label>
+              <select id="newMedMeal">
+                <option value="After Food (భోజనం తర్వాత)">After Food (భోజనం తర్వాత)</option>
+                <option value="Before Food (భోజనానికి ముందు)">Before Food (భోజనానికి ముందు)</option>
+                <option value="With Water / Anytime">With Water / Anytime</option>
+              </select>
+            </div>
+            <div class="form-group flex-1">
+              <label data-i18n="med_pills_left">Current Stock (Pills)</label>
+              <input type="number" id="newMedStock" value="15" min="1" max="100">
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label data-i18n="med_purpose_label">Purpose / Doctor Note (Optional)</label>
+            <input type="text" id="newMedPurpose" placeholder="e.g. For Blood Pressure / Diabetes control">
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" onclick="window.app.closeModal('addMedicineModal')" data-i18n="btn_cancel">Cancel</button>
+          <button type="submit" class="btn btn-primary" data-i18n="save_reminder_btn">Save Medication Reminder</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+
+  <!-- 4. UPLOAD HEALTH RECORD MODAL -->
+  <div class="modal-backdrop" id="uploadRecordModal">
+    <div class="modal-dialog glass-card">
+      <div class="modal-header">
+        <div class="modal-title-wrap">
+          <div class="modal-badge-icon icon-blue"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg></div>
+          <div>
+            <h3 data-i18n="modal_upload_title">Add Record to Aarogya Vault</h3>
+            <p data-i18n="modal_upload_sub">Upload lab reports, prescriptions, or discharge notes</p>
+          </div>
+        </div>
+        <button class="close-modal-btn" onclick="window.app.closeModal('uploadRecordModal')">&times;</button>
+      </div>
+      <form id="uploadRecordForm" onsubmit="window.app.saveNewRecord(event)">
+        <div class="modal-body">
+          <div class="form-group">
+            <label data-i18n="record_title_label">Document / Report Title</label>
+            <input type="text" id="newRecordTitle" required placeholder="e.g. Complete Blood Picture (CBP) / Dr. Rao Prescription">
+          </div>
+
+          <div class="form-row">
+            <div class="form-group flex-1">
+              <label data-i18n="record_type_label">Category</label>
+              <select id="newRecordCategory" required>
+                <option value="lab">Lab & Blood Report</option>
+                <option value="prescription">Doctor Prescription</option>
+                <option value="vaccine">Vaccination Certificate</option>
+                <option value="discharge">Hospital Discharge Summary</option>
+              </select>
+            </div>
+            <div class="form-group flex-1">
+              <label data-i18n="record_hospital_label">Hospital / Lab Name</label>
+              <input type="text" id="newRecordHospital" placeholder="e.g. YSR Area Hospital / Vijaya Diagnostics" value="YSR Area Hospital, Vijayawada">
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group flex-1">
+              <label data-i18n="record_date_label">Date of Test / Visit</label>
+              <input type="date" id="newRecordDate" required>
+            </div>
+            <div class="form-group flex-1">
+              <label data-i18n="record_doctor_label">Doctor / Pathologist</label>
+              <input type="text" id="newRecordDoctor" placeholder="Dr. S. K. Murthy" value="Dr. S. K. Murthy">
+            </div>
+          </div>
+
+          <div class="upload-dropzone" id="dropzoneBox" onclick="document.getElementById('recordFileInput').click()">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+            <p><strong data-i18n="click_upload">Click to Select File / Take Camera Photo</strong></p>
+            <small data-i18n="file_types_supported">Supports PDF, JPG, PNG (Max 25MB)</small>
+            <input type="file" id="recordFileInput" style="display:none" onchange="window.app.handleFileSelected(this)">
+            <div id="selectedFileNameDisplay" class="selected-file-name"></div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" onclick="window.app.closeModal('uploadRecordModal')" data-i18n="btn_cancel">Cancel</button>
+          <button type="submit" class="btn btn-primary" data-i18n="save_to_vault_btn">Save to Aarogya Vault</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+
+  <!-- 5. 24/7 EMERGENCY SOS MODAL -->
+  <div class="modal-backdrop" id="emergencyModal">
+    <div class="modal-dialog glass-card modal-sos">
+      <div class="modal-header header-emergency">
+        <div class="modal-title-wrap">
+          <div class="modal-badge-icon icon-danger-pulse"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2L1 21h22L12 2zm0 3.99L19.53 19H4.47L12 5.99zM11 10h2v4h-2zm0 6h2v2h-2z"/></svg></div>
+          <div>
+            <h3 data-i18n="emergency_ap_title">Andhra Pradesh 24/7 Emergency Assistance</h3>
+            <p data-i18n="emergency_ap_sub">Instant 1-Touch Dispatch to Ambulance & Area Hospitals</p>
+          </div>
+        </div>
+        <button class="close-modal-btn" onclick="window.app.closeModal('emergencyModal')">&times;</button>
+      </div>
+      <div class="modal-body">
+        
+        <!-- Big One-Touch SOS Dispatch Button -->
+        <div class="sos-big-action-card">
+          <button class="giant-sos-button" id="triggerSosBeaconBtn" onclick="window.app.triggerSosBeacon()">
+            <span class="beacon-wave wave1"></span>
+            <span class="beacon-wave wave2"></span>
+            <span class="beacon-inner">
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2L1 21h22L12 2zm0 3.99L19.53 19H4.47L12 5.99zM11 10h2v4h-2zm0 6h2v2h-2z"/></svg>
+              <strong>SEND SOS BEACON</strong>
+              <small>Dispatches GPS to 108 & Family</small>
+            </span>
+          </button>
+          <p class="sos-note" id="sosBeaconStatusText" data-i18n="sos_instruction">Tap to broadcast emergency location to 108 Command Center and your registered emergency contacts.</p>
+        </div>
+
+        <!-- 4 Core Emergency Speed Dial Grid -->
+        <div class="emergency-speed-grid">
+          <a href="tel:108" class="speed-dial-card card-108">
+            <div class="dial-num">108</div>
+            <div class="dial-title" data-i18n="dial_108_title">Free 108 Ambulance</div>
+            <p data-i18n="dial_108_desc">Accidents, Heart attack, Stroke & Trauma emergency.</p>
+          </a>
+
+          <a href="tel:104" class="speed-dial-card card-104">
+            <div class="dial-num">104</div>
+            <div class="dial-title" data-i18n="dial_104_title">104 Medical Advice</div>
+            <p data-i18n="dial_104_desc">Doctor consultation, medicine guidance & nearest PHC.</p>
+          </a>
+
+          <a href="tel:102" class="speed-dial-card card-102">
+            <div class="dial-num">102</div>
+            <div class="dial-title" data-i18n="dial_102_title">102 Thalli-Bidda</div>
+            <p data-i18n="dial_102_desc">Free maternal transport for pregnant mothers & infants.</p>
+          </a>
+
+          <a href="tel:112" class="speed-dial-card card-112">
+            <div class="dial-num">112</div>
+            <div class="dial-title" data-i18n="dial_112_title">112 National SOS</div>
+            <p data-i18n="dial_112_desc">Police, Fire & Unified Emergency Response.</p>
+          </a>
+        </div>
+
+        <!-- Nearest Hospitals & PHCs Directory in AP -->
+        <div class="nearby-hospitals-box">
+          <div class="hosp-head">
+            <h4 data-i18n="nearby_ap_hospitals">Nearest Hospitals & Primary Health Centres (PHC)</h4>
+            <span class="loc-tag">Krishna & Guntur Region</span>
+          </div>
+          <div class="hospitals-list" id="nearbyHospitalsList">
+            <!-- Populated by JS -->
+          </div>
+        </div>
+
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-secondary full-width" onclick="window.app.closeModal('emergencyModal')" data-i18n="btn_close">Close Emergency Window</button>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- 6. RECORD VIEWER MODAL -->
+  <div class="modal-backdrop" id="viewRecordModal">
+    <div class="modal-dialog glass-card">
+      <div class="modal-header">
+        <div class="modal-title-wrap">
+          <div class="modal-badge-icon icon-emerald"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/></svg></div>
+          <div>
+            <h3 id="viewRecordModalTitle">Medical Record Preview</h3>
+            <p id="viewRecordModalSub">Aarogya Vault Digital Copy</p>
+          </div>
+        </div>
+        <button class="close-modal-btn" onclick="window.app.closeModal('viewRecordModal')">&times;</button>
+      </div>
+      <div class="modal-body" id="viewRecordContent">
+        <!-- Injected dynamically -->
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-secondary" onclick="window.app.closeModal('viewRecordModal')" data-i18n="btn_close">Close</button>
+        <button class="btn btn-primary" onclick="window.app.shareRecordWhatsApp()">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+          <span data-i18n="share_whatsapp">Share via WhatsApp / Doctor</span>
+        </button>
+      </div>
+    </div>
+  </div>
+
   <!-- Toast Notification Container -->
-  <div id="toast-container" class="toast-container" aria-live="assertive"></div>
+  <div class="toast-container" id="toastContainer"></div>
 
-  <!-- Confetti Canvas -->
-  <canvas id="confetti-canvas" class="confetti-canvas"></canvas>
-
+  <!-- JavaScript Application Bundle -->
   <script src="app.js"></script>
 </body>
 </html>
