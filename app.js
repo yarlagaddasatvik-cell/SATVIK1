@@ -1,6 +1,6 @@
 /**
  * ==========================================================================
- * AROGYA MITRA (ఆరోగ్య మిత్ర) — APPLICATION LOGIC & STATE ENGINE
+ * HEALTH MITRA (హెల్త్ మిత్ర) — APPLICATION LOGIC & STATE ENGINE
  * Home Healthcare Platform for Rural & Urban Andhra Pradesh
  * ==========================================================================
  */
@@ -70,7 +70,7 @@
       today_medicines_title: "Today's Medicines (Schedule)",
       view_all: "View All",
       ap_govt_collab: "Andhra Pradesh Health & Family Welfare Network",
-      ap_govt_collab_desc: "Arogya Mitra is synced with YSR Village Health Clinics, PHCs, and 104 Mobile Medical Units across all districts.",
+      ap_govt_collab_desc: "Health Mitra is synced with YSR Village Health Clinics, PHCs, and 104 Mobile Medical Units across all districts.",
       view_ap_hospitals: "Find Nearest PHC / Hospital",
       book_visit_title: "Book Home Healthcare Visit",
       book_visit_sub: "Select certified healthcare professionals for visits anywhere in Andhra Pradesh",
@@ -102,7 +102,7 @@
       afternoon_slot: "Afternoon (మధ్యాహ్నం)",
       night_slot: "Night (రాత్రి)",
       rx_refill_title: "Village Pharmacy / Jana Aushadhi Refill Support",
-      rx_refill_desc: "Get your generic medicines delivered via Grama Sachivalayam / Arogya Mitra partner pharmacies at 80% lower cost.",
+      rx_refill_desc: "Get your generic medicines delivered via Grama Sachivalayam / Health Mitra partner pharmacies at 80% lower cost.",
       order_refill_btn: "Request Doorstep Refill",
       teleconsult_title: "Teleconsultation & Doctor Video Call",
       teleconsult_sub: "Connect with certified MBBS doctors and specialists in seconds via video or chat",
@@ -296,7 +296,7 @@
       afternoon_slot: "మధ్యాహ్నం (Afternoon)",
       night_slot: "రాత్రి (Night)",
       rx_refill_title: "గ్రామ ఫార్మసీ / జన ఔషధి మందుల డెలివరీ",
-      rx_refill_desc: "గ్రామ సచివాలయం / ఆరోగ్య మిత్ర ఫార్మసీ ద్వారా 80% తక్కువ ధరకే మీ ఇంటి వద్దకే జెనెరిక్ మందులు.",
+      rx_refill_desc: "గ్రామ సచివాలయం / హెల్త్ మిత్ర ఫార్మసీ ద్వారా 80% తక్కువ ధరకే మీ ఇంటి వద్దకే జెనెరిక్ మందులు.",
       order_refill_btn: "ఇంటి వద్దకే మందులు ఆర్డర్ చేయండి",
       teleconsult_title: "టెలికన్సల్టేషన్ & డాక్టర్ వీడియో కాల్",
       teleconsult_sub: "కొద్ది సెకన్లలోనే వీడియో లేదా చాట్ ద్వారా అర్హత కలిగిన MBBS వైద్యులను సంప్రదించండి",
@@ -1297,7 +1297,7 @@
           <div class="digital-pass">
             <div class="pass-top-bar">
               <div>
-                <span style="font-size:0.7rem; color:var(--text-muted); font-weight:700; text-transform:uppercase;">Government of Andhra Pradesh • Arogya Mitra</span>
+                <span style="font-size:0.7rem; color:var(--text-muted); font-weight:700; text-transform:uppercase;">Government of Andhra Pradesh • Health Mitra</span>
                 <div class="pass-id">${newBookingId}</div>
               </div>
               <span class="status-badge badge-confirmed">Confirmed ✓</span>
@@ -1337,7 +1337,7 @@
 
             <div class="pass-qr-box">
               <div>
-                <div style="font-size: 0.85rem; font-weight: 800; color: #065f46;">Arogya Mitra Secure Verification Pass</div>
+                <div style="font-size: 0.85rem; font-weight: 800; color: #065f46;">Health Mitra Secure Verification Pass</div>
                 <small style="color: #047857;">Show this digital pass to the visiting doctor/nurse upon arrival.</small>
               </div>
               <div style="font-size: 1.8rem;">📱</div>
@@ -1685,7 +1685,7 @@
     }
 
     shareRecordWhatsApp(title = "Medical Record") {
-      const text = encodeURIComponent(`Arogya Mitra AP Health Record: ${title} for Ramesh Garu. Verified via AP Aarogya Vault.`);
+      const text = encodeURIComponent(`Health Mitra AP Health Record: ${title} for Ramesh Garu. Verified via AP Aarogya Vault.`);
       window.open(`https://wa.me/?text=${text}`, '_blank');
     }
 
